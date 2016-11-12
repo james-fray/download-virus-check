@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Options</title>
+  <style>
+    body {
+      padding: 10px;
+      font-family: arial,sans-serif;
+      font-size: 13px;
+    }
+    label {
+      display: block;
+      padding: 3px 0;
+    }
+    input[type=number] {
+      width: 40px;
+      outline: none;
+    }
+    label p {
+      font-size: 80%;
+      color: #bfbfbf;
+      margin: 5px 10px;
+    }
+    textarea {
+      margin-top: 5px;
+      width: 100%;
+      height: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <label>
+    Min number of positive reports to display the warning window:
+    <input id="positives" type="number" min="1">
+    <p>Minimum acceptable value is 1; normally each file is checked against 68 anti-virus solutions.</p>
+  </label>
+  <p>
+    <b>Whitelist:</b> (comma separated list of mime types to ignore scan)
+    <textarea id="whitelist"></textarea>
+  </p>
+
+  <p>
+    <button id="save">Save</button><span id="status"></span>
+  </p>
+
+  <script src="index.js"></script>
+</body>
+</html>
