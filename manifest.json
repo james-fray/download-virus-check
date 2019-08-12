@@ -1,18 +1,18 @@
 {
   "name": "Download Virus Checker",
   "short_name": "idvchecker",
-  "description": "Automatically check all the downloads files against well-known anti-viruses using VirusTotal API",
+  "description": "Automatically check all the download files against well-known anti-viruses using VirusTotal API",
   "author": "James Fray",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "manifest_version": 2,
   "permissions": [
     "storage",
-    "tabs",
     "downloads",
     "notifications",
     "https://www.virustotal.com/*"
   ],
   "background": {
+    "persistant": false,
     "scripts": [
       "common.js"
     ]
@@ -23,11 +23,15 @@
       "32": "data/icons/32.png"
     }
   },
-  "homepage_url": "http://add0n.com/virus-checker.html",
+  "homepage_url": "https://add0n.com/virus-checker.html",
   "icons": {
     "16": "data/icons/16.png",
+    "32": "data/icons/32.png",
     "48": "data/icons/48.png",
-    "128": "data/icons/128.png"
+    "64": "data/icons/64.png",
+    "128": "data/icons/128.png",
+    "256": "data/icons/256.png",
+    "512": "data/icons/512.png"
   },
   "options_ui": {
     "page": "data/options/index.html",

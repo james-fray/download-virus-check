@@ -7,7 +7,7 @@ body {
   padding: 10px;
   box-sizing: border-box;
   font-size: 13px;
-  font-family: arial,sans-serif;
+  font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,6 +23,7 @@ h1 {
   width: 100%;
   max-width: 480px;
   color: red;
+  font-weight: 300;
 }
 table {
   width: 100%;
@@ -33,4 +34,11 @@ td {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+p {
+  background-color: #fff8c4;
+  border: solid 2px #f7deae;
+  padding: 10px;
+  border-radius: 2px;
 }

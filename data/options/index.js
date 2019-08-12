@@ -1,42 +1,53 @@
 'use strict';
 
-var log = document.getElementById('status');
+const toast = document.getElementById('toast');
 
-function restore_options () {
-  chrome.storage.local.get({
-    positives: 3,
-    whitelist: 'audio, video, text/plain'
-  }, (prefs) => {
-    Object.keys(prefs).forEach (name => {
-      document.getElementById(name)[typeof prefs[name] === 'boolean' ? 'checked' : 'value'] = prefs[name];
-    });
-  });
-}
+const restore = () => chrome.storage.local.get({
+  positives: 3,
+  whitelist: 'image/, audio/, video/, text/',
+  key: '',
+  log: false
+}, prefs => {
+  document.getElementById('key').value = prefs.key;
+  document.getElementById('whitelist').value = prefs.whitelist;
+  document.getElementById('positives').value = prefs.positives;
+  document.getElementById('log').checked = prefs.log;
+});
 
-function save_options() {
-  let prefs = {
+document.addEventListener('DOMContentLoaded', restore);
+document.getElementById('save').addEventListener('click', () => {
+  const prefs = {
     whitelist: document.getElementById('whitelist').value
-      .split(',')
-      .map(s => s.trim())
+      .split(/\s*,\s*/)
       .filter((s, i, l) => s && l.indexOf(s) === i)
       .join(', '),
-    positives: Math.max(1, document.getElementById('positives').value)
+    positives: Math.max(1, document.getElementById('positives').value),
+    key: document.getElementById('key').value,
+    log: document.getElementById('log').checked
   };
 
   chrome.storage.local.set(prefs, () => {
-    log.textContent = 'Options saved.';
-    setTimeout(() => log.textContent = '', 750);
-    restore_options();
+    toast.textContent = 'Options saved.';
+    setTimeout(() => toast.textContent = '', 750);
+    restore();
   });
-}
+});
 
-document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('save').addEventListener('click', () => {
-  try {
-    save_options();
+// reset
+document.getElementById('reset').addEventListener('click', e => {
+  if (e.detail === 1) {
+    toast.textContent = 'Double-click to reset!';
+    window.setTimeout(() => toast.textContent = '', 750);
   }
-  catch (e) {
-    log.textContent = e.message;
-    setTimeout(() => log.textContent = '', 750);
+  else {
+    localStorage.clear();
+    chrome.storage.local.clear(() => {
+      chrome.runtime.reload();
+      window.close();
+    });
   }
 });
+// support
+document.getElementById('support').addEventListener('click', () => chrome.tabs.create({
+  url: chrome.runtime.getManifest().homepage_url + '?rd=donate'
+}));
