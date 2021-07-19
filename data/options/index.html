@@ -2,64 +2,36 @@
 <html>
 <head>
   <title>Options :: Download Virus Checker</title>
-  <style>
-    input[type=number],
-    input[type=text],
-    textarea {
-      min-width: 200px;
-    }
-    td ~ td {
-      text-align: right;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr min-content;
-      grid-gap: 10px;
-      align-items: center;
-      justify-items: left;
-    }
-    .note {
-      margin: 0;
-      padding: 12px;
-      color: #7d7d7d;
-    }
-    @supports (-moz-appearance:none) {
-      body {
-        font-size: 13px;
-        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-        margin: 10px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="index.css">
   <meta charset="utf-8">
 </head>
 
 <body>
   <div class="grid">
-    <label for="positives">Report Margin<sup>1</sup>:</label>
+    <label for="positives">Report Margin:</label>
     <input id="positives" type="number" min="1">
-    <label for="key">VirusTotal's API Key<sup>2</sup>:</label>
-    <input type="text" id="key">
-    <label for=log>Enable Console Logging<sup>3</sup>:</label>
+    <span class="note">Minimum number of positive reports to display the warning window. The minimum acceptable value is 1. Normally each file is checked against 68 anti-virus solutions.</span>
+    <label for="key">API Key:</label>
+    <input type="text" id="key" placeholder="VirusTotal's API Key">
+    <span class="note">By default, any VirusTotal Community registered user is entitled to a free API key that allows them to interact with a basic set of endpoints. First <a href="https://www.virustotal.com/gui/join-us">Register</a> and then get <a href="https://www.virustotal.com/gui/user/belaviyo/apikey">your API key</a> to insert into this box. Without the API key, this extension is <b>not</b> able to check your downloads.</span>
+    <label for=log>Enable Console Logging:</label>
     <input type="checkbox" id="log">
+    <span class="note">Displays logs. Use only for debugging</span>
   </div>
 
   <div style="margin-top: 10px;">
     <label>Whitelist<sup>4</sup>:</label>
-    <textarea id="whitelist" style="width:100%; box-sizing: border-box; margin-top: 5px;" cols="4"></textarea>
+    <textarea id="whitelist" cols="6"></textarea>
   </div>
-
-  <ol class="note">
-    <li>Minimum number of positive reports to display the warning window. The minimum acceptable value is 1. Normally each file is checked against 68 anti-virus solutions.</li>
-    <li>By default, any VirusTotal Community registered user is entitled to a free API key that allows them to interact with a basic set of endpoints. First <a href="https://www.virustotal.com/gui/join-us">Register</a> and then get <a href="https://www.virustotal.com/gui/user/belaviyo/apikey">your API key</a> to insert into this box. Without the API key, this extension is <b>not</b> able to check your downloads.</li>
-    <li>Use it only for debugging</li>
-    <li>Comma-separated list of mime-types to ignore scanning</li>
-  </ol>
+  <span>Comma-separated list of mime-types to ignore scanning</span>
 
   <div id="explore"></div>
   <p>
     <input type="button" value="Reset to Defaults" id="reset">
-    <input type="button" value="Support Development" id="support"> - <input type="button" value="Save" id="save"> <span id="toast"></span>
+    <input type="button" value="Support Development" id="support">
+  </p>
+  <p>
+    <input type="button" value="Save Options" id="save"> <span id="toast"></span>
   </p>
 
   <script src="index.js"></script>

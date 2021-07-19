@@ -1,21 +1,21 @@
 {
-  "name": "Download Virus Checker",
+  "name": "Virus Checker for Downloads",
   "description": "Automatically check all the download files against well-known anti-viruses using VirusTotal API",
-  "version": "0.1.3",
-  "manifest_version": 2,
+  "version": "0.2.0",
+  "manifest_version": 3,
   "permissions": [
     "storage",
     "downloads",
     "notifications",
+    "alarms"
+  ],
+  "host_permissions": [
     "https://www.virustotal.com/*"
   ],
   "background": {
-    "persistant": false,
-    "scripts": [
-      "common.js"
-    ]
+    "service_worker": "worker.js"
   },
-  "browser_action": {
+  "action": {
     "default_title": "Badge number displays the number of active scanning jobs. Click to abort these jobs."
   },
   "homepage_url": "https://add0n.com/virus-checker.html",
@@ -29,7 +29,6 @@
     "512": "data/icons/512.png"
   },
   "options_ui": {
-    "page": "data/options/index.html",
-    "chrome_style": true
+    "page": "data/options/index.html"
   }
 }
